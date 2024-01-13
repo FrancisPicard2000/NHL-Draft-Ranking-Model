@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 from pathlib import Path
-import argparse
 
 
 # Retrieve the html content of the page corresponding to the given year
@@ -28,17 +27,8 @@ def extract_data(year):
         break
         
 
-    
-
-
-    
-
-
-
 def main():
     extract_data(2006)
-
-
 
 
 if __name__ == "__main__":
