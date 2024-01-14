@@ -14,7 +14,7 @@ def fetch_qmjhl_html(user_agent):
     headers = {"User-Agent" : user_agent}
 
     if not fpath.exists():
-        html_data = requests.get(QMJHL_ROOTPAGE_URL, headers=HEADERS)
+        html_data = requests.get(QMJHL_ROOTPAGE_URL, headers=headers)
 
         with open(fpath, "w") as f:
             f.write(html_data.text)
