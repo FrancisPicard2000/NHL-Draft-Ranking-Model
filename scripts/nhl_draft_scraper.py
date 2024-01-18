@@ -1,5 +1,7 @@
 import requests
 import argparse
+import json
+import csv
 from pathlib import Path
 from bs4 import BeautifulSoup
 
@@ -39,16 +41,38 @@ def retrieve_draft_data(html_content):
 
     soup = BeautifulSoup(html_content, "html.parser")
     data_body = soup.find("tbody")
-    players_tr_list = data_body.find_all("tr")
+    players_tr_list = data_body.find_all("tr", class_=lambda x: x != "hideme")
+
+    team_label_map_file = open("../data/other/team_label_map.json", "r")
+    team_label_map = json.load(team_label_map_file)
+
+    chl_data = []
 
     for player_tr in players_tr_list:
+
+        # Extract the name
         player_name = player_tr.find("a", {"target" : "players"}).text
+
+        # Extract the position
+        player_position_unformatted = player_tr.find("td", {"class" : "hidemob"}).text
+        if (player_position_unformatted in ["L", "R"]):
+            player_position = player_position_unformatted + "W"
+        else:
+            player_position = player_position_unformatted
+        
+        # Extract the team label
         player_junior_team_unformatted = player_tr.find("td", {"class" : "l hidemob"}).text
-        
-        
+        player_junior_team_components = player_junior_team_unformatted.split(" ")
+        player_junior_team = " ".join(player_junior_team_components[0:-1])
+        player_junior_team_league = player_junior_team_components[-1].strip("[]")
 
-    
+        if player_junior_team_league in ["QMJHL", "OHL", "WHL"]:      # If the player is from the CHL, keep his info
+            player_junior_team_label = team_label_map[player_junior_team]
+            chl_data.append([player_name, player_position, player_junior_team_league, player_junior_team_label])
 
+    team_label_map_file.close()
+    return chl_data
+            
 
 
 def main():
@@ -59,13 +83,20 @@ def main():
     year = int(args.y)
 
     html_content = get_draft_page_html_content(year)
+    draft_data = retrieve_draft_data(html_content)
 
-    retrieve_draft_data(html_content)
+    # Store the draft data
+    draft_data_file_path = f"../data/extracted_data/draft/draft{year}_stats.csv"
+    header = ["Name", "Position", "League", "Team"]
 
+    with open(draft_data_file_path, 'w', newline='') as f:
+
+        tsv_writer = csv.writer(f, delimiter='\t')
+        tsv_writer.writerow(header)
+
+        for datapoint in draft_data:
+            tsv_writer.writerow(datapoint)
 
     
-
-
-
 if __name__ == "__main__":
     main()
