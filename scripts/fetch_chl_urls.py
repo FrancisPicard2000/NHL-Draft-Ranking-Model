@@ -11,7 +11,7 @@ WHL_ROOTPAGE_URL = "https://chl.ca/whl/stats/players/"
 USER_AGENT = None
 
 
-# Return the HTML content of the QMJHL page that contains the URLs of the other pages of interest
+# Return the HTML content of the junior league page that contains the URLs of the other pages of interest
 def fetch_junior_league_html(html_output_file_path, rootpage_url):
 
     fpath = Path(html_output_file_path)
@@ -40,7 +40,7 @@ def fetch_junior_league_html(html_output_file_path, rootpage_url):
 
 
 
-# Fetch the season stats urls for a given league
+# Fetch the season stats urls for a given junior league
 def fetch_urls(tsv_output_file_path, html_output_file_path, rootpage_url):
 
     content = fetch_junior_league_html(html_output_file_path, rootpage_url)
