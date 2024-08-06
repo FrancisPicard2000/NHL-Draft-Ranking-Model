@@ -28,7 +28,7 @@ def retrieve_season_url(league, season):
 
 
 # Retrieve the html content of the webpage
-def retrieve_hmtl_content(url, league, season):
+def retrieve_hmtl_content(url, league):
     
     html_output_file_path = f"../data/html_pages/{league}/{league}_{SEASON_YEARS}_{SEASON_TYPE}.html"
 
@@ -59,19 +59,16 @@ def retrieve_hmtl_content(url, league, season):
 
 
 # Retrieve the data from the html file and preprocess it
-def retrieve_data_unformatted(html_content, league):
+def retrieve_data_unformatted(html_content, league, season_starting_year):
 
     # Specific script tag to retrieve the data from
-    if (SEASON_TYPE == "playoffs"):
-        if (league == "qmjhl"):
+    if (league == "qmjhl"):
+        if ((SEASON_TYPE == "playoffs") or ((season_starting_year < 2003) or (season_starting_year > 2017))):
             script_tag_no = 19
         else:
-            script_tag_no = 16
-    else:
-        if (league == "qmjhl"):
             script_tag_no = 23
-        else:
-            script_tag_no = 16
+    else:
+        script_tag_no = 16
 
     soup = BeautifulSoup(html_content, "html.parser")
     script_text = soup.find_all("script")[script_tag_no:script_tag_no+1][0].text
@@ -150,11 +147,12 @@ def main():
     league = args.l
     season = args.s
     season_components = season.split(" ")
+    season_starting_year = int(season_components[0][0:4])
 
     SEASON_YEARS = season_components[0]
     if (len(SEASON_YEARS) == 6):
         SEASON_YEARS = SEASON_YEARS[:5] + "0" + SEASON_YEARS[5]
-
+    
     if (season_components[-1].lower() == "playoffs"):
         SEASON_TYPE = "playoffs"
     else:
@@ -166,7 +164,7 @@ def main():
 
     html_content = retrieve_hmtl_content(url, league, season)
 
-    unf_data = retrieve_data_unformatted(html_content, league)
+    unf_data = retrieve_data_unformatted(html_content, league, season_starting_year)
 
     process_unformatted_data(unf_data, league)
     
