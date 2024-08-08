@@ -14,7 +14,7 @@ current_year=$first_year
 chl_leagues=("qmjhl" "ohl" "whl")
 
 # Retrieve the relevant urls
-python fetch_chl_urls.py -u "$user_agent"
+python retrieve_chl_urls.py -u "$user_agent"
 
 # Retrieve the CHL data
 while [ $current_year -le $last_year ] 
