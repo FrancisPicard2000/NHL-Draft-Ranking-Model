@@ -2,6 +2,7 @@ import argparse
 import json
 import pandas as pd
 from pathlib import Path
+pd.options.mode.chained_assignment = None
 
 JUNIOR_LEAGUES = ['QMJHL', 'OHL', 'WHL']
 FORWARDS_POSITIONS = ['C', 'LW', 'RW']
@@ -101,8 +102,8 @@ def main():
         no_playoff_stats = base_table_chl_reg_season_augmented.loc[base_table_chl_reg_season_augmented['PGP'] == 0]
         extra_columns = set(base_table_chl_augmented) - set(no_playoff_stats)
         for col in extra_columns:
-            no_playoff_stats = no_playoff_stats.assign(**{col: 0})
-        
+            no_playoff_stats[col] = 0
+
         base_table_chl_augmented = pd.concat([base_table_chl_augmented, no_playoff_stats], ignore_index=True)
         
         # Merge above and NHL Draft
