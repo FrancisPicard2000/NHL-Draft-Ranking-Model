@@ -1,6 +1,7 @@
 import argparse
 import json
 import pandas as pd
+from pathlib import Path
 
 JUNIOR_LEAGUES = ['QMJHL', 'OHL', 'WHL']
 FORWARDS_POSITIONS = ['C', 'LW', 'RW']
@@ -38,6 +39,7 @@ def load_chl_data(current_year):
     for junior_league in JUNIOR_LEAGUES:
         jl_lower = junior_league.lower()
         junior_league_reg_season_table = pd.read_csv(f"../data/extracted_data/{jl_lower}/regular_season/{jl_lower}_{season_year}_regular_season_stats.tsv", sep='\t', encoding='utf8')
+        junior_league_reg_season_table['Year'] = season_year
         if (junior_league == JUNIOR_LEAGUES[0]):
             chl_reg_season_table = junior_league_reg_season_table
         else:
@@ -118,6 +120,7 @@ def main():
         
     # Write dataset to file
     dataset_formatted = dataset.drop(columns=['Name', 'Team'])
+    Path("../data/model_dataset").mkdir(parents=True, exist_ok=True)
     dataset_formatted.to_csv(f'../data/model_dataset/whole_dataset{first_draft_year}-{last_draft_year}.tsv', sep='\t', index=False, encoding='utf8')
 
 

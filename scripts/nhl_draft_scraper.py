@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import argparse
 import csv
+from pathlib import Path
 
 
 
@@ -103,6 +104,7 @@ def main():
     data = extract_draft_data(driver)
 
     # Store the draft data
+    Path("../data/extracted_data/draft").mkdir(parents=True, exist_ok=True)
     draft_data_file_path = f"../data/extracted_data/draft/draft{year}_stats.tsv"
     header = ["Name", "Position", "League", "Team", "Height", "Weight"]
 

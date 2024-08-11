@@ -82,6 +82,7 @@ def retrieve_data_unformatted(html_content, league, season_starting_year):
 # Process the unformatted data retrieved from the html file
 def process_unformatted_data(data, league):
 
+    Path(f"../data/extracted_data/{league}/{SEASON_TYPE}").mkdir(parents=True, exist_ok=True)
     output_csv_file_path = f"../data/extracted_data/{league}/{SEASON_TYPE}/{league}_{SEASON_YEARS}_{SEASON_TYPE}_stats.tsv"
     fpath = Path(output_csv_file_path) 
     

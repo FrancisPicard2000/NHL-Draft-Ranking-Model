@@ -56,6 +56,8 @@ def fetch_urls(tsv_output_file_path, html_output_file_path, rootpage_url):
 
 
     # Write data to file
+    directory_path = "/".join(tsv_output_file_path.split("/")[:-1]) # remove filename from path
+    Path(directory_path).mkdir(parents=True, exist_ok=True)
     with open(tsv_output_file_path, 'w', newline='', encoding="utf8") as f:
         tsv_writer = csv.writer(f, delimiter='\t')
 

@@ -174,6 +174,7 @@ def main():
     # Click on every player, retrieve the data, and write to file
     drafted_players = driver.find_elements(By.XPATH, '//*[@target="players"]')
 
+    Path("../data/extracted_data/base").mkdir(parents=True, exist_ok=True)
     output_file = f"../data/extracted_data/base/base_table_draft{draft_year}.tsv"
     fpath = Path(output_file) 
     header = ["Rank", "Name", "Team", "League", "GP", "G", "A", "PTS", "PIM", "+/-", "PGP", "PG", "PA", "PPTS", "PPIM", "Proj_PTS/GP"]
