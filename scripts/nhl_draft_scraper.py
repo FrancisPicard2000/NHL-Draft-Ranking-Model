@@ -1,7 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import argparse
-import json
 import csv
 
 
@@ -10,7 +11,6 @@ import csv
 def extract_draft_data(driver):
 
     draft_data = []
-
     # Collect data on all web pages
     while True:
         page_data_unformatted = retrieve_player_info_page(driver)
@@ -33,7 +33,7 @@ def extract_draft_data(driver):
 def retrieve_player_info_page(driver):
     
     data = []
-
+    WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.CLASS_NAME, "rt-tr-group")))
     player_blocks = driver.find_elements(By.CLASS_NAME, "rt-tr-group")
     for player in player_blocks:
         player_info_components = player.text.split("\n")

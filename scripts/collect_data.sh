@@ -15,4 +15,4 @@ last_season_second_year=${last_draft_year:2}
 ./fetch_hockeydb_data.sh "$first_draft_year" "$last_draft_year" "$year_gap"
 ./fetch_chl_data.sh "$first_season_first_year-$first_season_second_year" "$last_season_first_year-$last_season_second_year"
 ./fetch_nhl_draft_data.sh "$first_draft_year" "$last_draft_year"
-python create_dataset.py -f "$first_draft_year" -l "last_draft_year"
+python create_dataset.py -f "$first_draft_year" -l "$last_draft_year"
