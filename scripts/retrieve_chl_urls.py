@@ -35,14 +35,13 @@ def fetch_junior_league_html(html_output_file_path, rootpage_url):
         with open(fpath, "w") as f:
             f.write(html_data.text)
 
-    with open(fpath, "r") as f:
+    with open(fpath, "r", encoding="utf8") as f:
         return f.read()
 
 
 
 # Fetch the season stats urls for a given junior league
 def fetch_urls(tsv_output_file_path, html_output_file_path, rootpage_url):
-
     content = fetch_junior_league_html(html_output_file_path, rootpage_url)
     data = [["season_type", "season_stats_url"]]
 
@@ -57,8 +56,7 @@ def fetch_urls(tsv_output_file_path, html_output_file_path, rootpage_url):
 
 
     # Write data to file
-    with open(tsv_output_file_path, 'w', newline='') as f:
-
+    with open(tsv_output_file_path, 'w', newline='', encoding="utf8") as f:
         tsv_writer = csv.writer(f, delimiter='\t')
 
         for datapoint in data:

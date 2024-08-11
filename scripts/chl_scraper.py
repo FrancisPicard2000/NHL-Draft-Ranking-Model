@@ -30,7 +30,7 @@ def retrieve_season_url(league, season):
 # Retrieve the html content of the webpage
 def retrieve_hmtl_content(url, league):
     
-    html_output_file_path = f"../data/html_pages/{league}/{league}_{SEASON_YEARS}_{SEASON_TYPE}.html"
+    html_output_file_path = f"../data/html_pages/{league}/{SEASON_TYPE}/{league}_{SEASON_YEARS}_{SEASON_TYPE}.html"
 
     fpath = Path(html_output_file_path)
     headers = {
@@ -82,12 +82,13 @@ def retrieve_data_unformatted(html_content, league, season_starting_year):
 # Process the unformatted data retrieved from the html file
 def process_unformatted_data(data, league):
 
-    output_csv_file_path = f"../data/extracted_data/{league}/{league}_{SEASON_YEARS}_{SEASON_TYPE}_stats.csv"
+    output_csv_file_path = f"../data/extracted_data/{league}/{SEASON_TYPE}/{league}_{SEASON_YEARS}_{SEASON_TYPE}_stats.tsv"
     fpath = Path(output_csv_file_path) 
     
     header = [
         "Name",
         "Position",
+        "Team",
         "GP",
         "G",
         "A",
@@ -105,7 +106,7 @@ def process_unformatted_data(data, league):
         "First",
         "Insurance",
         "SOGP",
-        "SO/G"
+        "SO/G",
         "ATT",
         "SOWG",
         "SO%",
@@ -121,14 +122,14 @@ def process_unformatted_data(data, league):
 
     player_data_list = ast.literal_eval(data) # list containing one element per player
     
-    with open(fpath, "w", newline='') as f:
-        writer = csv.writer(f)
+    with open(fpath, "w", newline='', encoding='utf8') as f:
+        writer = csv.writer(f, delimiter='\t')
         writer.writerow(header)
 
         for player_data in player_data_list:
             player_name = [unidecode(' '.join(reversed(player_data[5][1].split(', '))))]
             player_position = [player_data[1]]
-            player_team = [player_data[6][0][1]]
+            player_team = [player_data[6][-1][1]]
             player_other_stats = [int(i) for i in player_data[7:-6]] + [float(i) for i in player_data[-6:-5]] + [int(i) for i in player_data[-5:-3]] + [float(i) for i in player_data[-3:]]
         
             player_row = player_name + player_position + player_team + player_other_stats
@@ -152,7 +153,7 @@ def main():
     SEASON_YEARS = season_components[0]
     if (len(SEASON_YEARS) == 6):
         SEASON_YEARS = SEASON_YEARS[:5] + "0" + SEASON_YEARS[5]
-    
+
     if (season_components[-1].lower() == "playoffs"):
         SEASON_TYPE = "playoffs"
     else:
@@ -162,7 +163,7 @@ def main():
 
     url = retrieve_season_url(league, season)
 
-    html_content = retrieve_hmtl_content(url, league, season)
+    html_content = retrieve_hmtl_content(url, league)
 
     unf_data = retrieve_data_unformatted(html_content, league, season_starting_year)
 

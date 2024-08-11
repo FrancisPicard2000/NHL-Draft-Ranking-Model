@@ -29,7 +29,7 @@ def extract_draft_data(driver):
 
 
 
-# Retrieve the players' info in the given page
+# Retrieve the players' info from the given page
 def retrieve_player_info_page(driver):
     
     data = []
@@ -58,8 +58,6 @@ def format_height(height_string):
 def format_raw_data(raw_data):
 
     formatted_data = []
-    team_label_map_file = open("../data/other/team_label_map.json", "r")
-    team_label_map = json.load(team_label_map_file)
 
     for raw_player_data in raw_data:
         if (len(raw_player_data) == 12):
@@ -73,13 +71,13 @@ def format_raw_data(raw_data):
         player_name = raw_player_data[1]
         player_position = raw_player_data[6-add_ind]
         player_junior_team_league = raw_player_data[10-add_ind]
+        player_junior_team = raw_player_data[-1]
         player_height = format_height(raw_player_data[8-add_ind])
         player_weight = int(raw_player_data[9-add_ind])
 
         # If the player is from the CHL, keep his info
         if (player_junior_team_league in ['QMJHL', 'OHL', 'WHL']):
-            player_junior_team_label = team_label_map[raw_player_data[-1]]
-            player_data = [player_name, player_position, player_junior_team_league, player_junior_team_label, player_height, player_weight]
+            player_data = [player_name, player_position, player_junior_team_league, player_junior_team, player_height, player_weight]
             formatted_data.append(player_data)
 
     return formatted_data
@@ -90,7 +88,7 @@ def main():
 
     # Parse the arguments to retrieve the desired draft year
     parser = argparse.ArgumentParser()
-    parser.add_argument("-y", help="year to scrape")
+    parser.add_argument("-y", help="year to scrape (e.g. 2009)")
     args = parser.parse_args()
     year = int(args.y)
     
@@ -105,10 +103,10 @@ def main():
     data = extract_draft_data(driver)
 
     # Store the draft data
-    draft_data_file_path = f"../data/extracted_data/draft/draft{year}_stats.csv"
+    draft_data_file_path = f"../data/extracted_data/draft/draft{year}_stats.tsv"
     header = ["Name", "Position", "League", "Team", "Height", "Weight"]
 
-    with open(draft_data_file_path, 'w', newline='') as f:
+    with open(draft_data_file_path, 'w', newline='', encoding="utf8") as f:
 
         tsv_writer = csv.writer(f, delimiter='\t')
         tsv_writer.writerow(header)
