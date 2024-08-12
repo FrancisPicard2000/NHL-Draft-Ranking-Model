@@ -3,8 +3,9 @@
 ## Overview
 This project aims to develop machine learning models to predict how good eligible draft hockey players will be in the future. Currently, the dataset consists of 57 statistics about 917 NHL drafted forwards who have played in the CHL (Canadian Hockey League) between 2000-01 and 2018-19. The models are meant to be used by NHL teams before the NHL Entry draft to make projections on all the relevant CHL players, which might be used later to select the best available player.
 
-\
-\
+  
+  
+
 ## Question Definition
 My initial goal was to answer the fundamental question every team is trying to answer before the draft:
 
@@ -24,9 +25,9 @@ There is one final thing to add to make it a measurable question: in which leagu
 
 This is a measurable question. To compare projections in the AHL and the NHL, I have decided to turn the problem into a classification one. Briefly, the models will classify players in buckets of points per regular season game in either the AHL or the NHL. The classes/projections will consists of a league (either the AHL or the NHL) and a range of points per game (e.g. \[0.6, 0.8) ). This is because the skill gap between the NHL and the AHL is considerable and the same point rate per game in both leagues reflects very different player skill levels. 
 
-\
-\
+  
 
+  
 ## Data Collection
 The dataset consists of several regular season, playoff, and other statistics about NHL-drafted player from the CHL between 2001 and 2019 (inclusive). Each record corresponds to a drafted player and each feature corresponds to a statistic about it. Among the various hockey databases freely available on the web, HockeyDB is a great place to start collecting this data. Indeed, on HockeyDB, every drafted player is attributed a unique ID that can be used to retrieve yearly statistics about such player in many different leagues, including the CHL, NHL, and AHL. The main concern with collecting data from HockeyDB alone is that there aren't a ton of statistics to work with. For example, the regular season stats only include the GP (number of games played), G (number of goals scored), A (number of assists), Pts (number of points), PIM (number of penalty minutes), and the +/-. However, together with the player's name and the team he played for, we have a great set of features that can almost uniquely define a player. Truly, it would be improbable that two players with the same name played for the same team, during the same year, and had all of those statistics equal. 
 
@@ -38,7 +39,8 @@ Over the data collection process, I will be using draft years and regular season
 
 TLDR: To check how to collect the whole data, it is sufficient to check the Automating the Data Collection Process section.
 
-\
+  
+
 ### HockeyDB stats scraping:
 As mentioned above, the first step will be to collect basic statistics from HockeyDB. To start, there is a web page for every NHL Entry Draft on HockeyDB. From there, we can access every drafted player's data web page and retrieve the data corresponding to the appropriate years. For this scraping task, I have decided to use Selenium with a Firefox webdriver. The hockeydb_scraper.py script takes as input a draft year and the gap in years between the NHL Entry Draft and the time to record the *PTS/GP target (which should be thought of as in how many years after the draft we want to retrieve the regular season *PTS/GP statistic). It retrieves all the necessary data from HockeyDB for the input draft year. To automate the process of scraping for multiple years, the fetch_hockeydb_data.sh script should be called. From the user's standpoint, running the bash script is sufficient to collect the data from HockeyDB. For example, to retrieve the data on HockeyDB from the 2001 draft until the 2019 draft with a gap of five years between the NHL Entry Draft and the target recording, one would call
 
@@ -46,7 +48,8 @@ As mentioned above, the first step will be to collect basic statistics from Hock
 
 It took one hour and twenty minutes to run the script on my machine with those inputs. Note that there are about 230 web pages to scrape per draft year, for a total of roughly 4,370 web pages to scrape between 2001 and 2019.
 
-\
+  
+
 ### CHL stats scraping:
 Next, we will scrape the CHL website for additional CHL statistics. The webpages of interest are statically loaded, so I have used the BeautifulSoup and Requests packages to scrape them. One of the concerns is that the URLs of the desired pages contain a number (e.g. https://chl.ca/lhjmq/en/stats/players/178/) which depends, to the best of my knowledge, on the number of webpages already created on the website. Yet, when the number is omitted, the web browser is directed to the most recent webpage (i.e. the webpage of the most recent data). Thankfully, the page source of the most recent web page contains the URLs of the other pages of interest. 
 
@@ -58,7 +61,8 @@ It took two minutes to run the script on my machine with those inputs.
 
 Gotcha: The CHL website has been able to detect that scrapers were used, even with custom headers, after as little as two requests. So the scripts might only work when the page sources are already stored locally. However, as there would only be six of new pages to add every year (regular season and playoffs for each of the three junior leagues), I didn't bother too much on this issue. Still, all the scripts can take as input the User Agent as well, but this argument can be omitted when calling them. In the future, it would be interesting to see if using other scraping techniques and packages (e.g. Selenium) would solve the issue. The main branch contains the page sources needed.
 
-\
+  
+
 ### NHL draft scraping:
 The *Weight and *Height at the draft have been scraped from the NHL website. As those webpages are dynamically loaded, the scraper is built using Selenium and a Firefox webdriver. The nhl_draft_scraper.py retrieves those features for every NHL-drafted player from the CHL for a specific year, as well as other features used to merge the tables (i.e. the player's name, junior team, etc.). To automate the process of collecting the features for multiple consecutive years, the fetch_nhl_draft_data.sh bash script should be used. For example, to retrieve the NHL draft data from the 2001 draft until the 2019 draft, one would call
 
@@ -66,7 +70,8 @@ The *Weight and *Height at the draft have been scraped from the NHL website. As 
 
 It took four minutes and 30 seconds to run the script on my machine with those inputs.
 
-\
+  
+
 ### Merging the Data
 The final step of the data collection process is to merge the data we have gathered. First, we will do an inner join between the HockeyDB data and the CHL stats data on the players' names, junior teams, GP, G, A, and PTS. As already mentioned, it would be surprising that those features do not uniquely define a player for a given year, so I have assumed that they do. Next, we will perform an inner join between the obtained table and the NHL draft data on the players' names and junior teams. Since drafted players in a specific year are referred to by their names and junior teams, I will assume that they uniquely define a player. The create_dataset.py script does all this work. To create the dataset from the 2001 draft to the 2019 draft, one would call
 
@@ -74,7 +79,8 @@ The final step of the data collection process is to merge the data we have gathe
 
 It is worth addressing the potential disparities among the HockeyDB, the CHL, and the NHL websites. First, there are very few differences in the GP, G, A, and PTS statistics for the same player between the HockeyDB and the CHL website (less than a handful per year). As these errors occur randomly, I have decided to exclude the players with at least one disparity in those features because doing this would not introduce bias. Next, I have observed that most of the disparities among the three websites occur in the players' name. From my observations, about 4% of the drafted CHL players have their names spelled differently in at least two of the three websites. I noticed that those players usually have a cognate first name, e.g. Mike and Michael, or their last name is capitalized differently. e.g. McLachlan and Mclachlan. So I wouldn't say that these errors are happening randomly among the players. However, I think it is fair to assume in general that a player's name is independent of his success. Especially, that those errors do not target any type of player from the point of view of hockey statistics. Hence, I have decided to exclude the players whose names are spelled differently across at least two websites as doing so would again not introduce any bias. 
 
-\
+  
+
 ### Automating the Data Collection Process
 The collect_data.sh script can be called to do the whole data collection process. To create the dataset from the 2001 draft to the 2019 draft and to record the regular season PTS/GP statistics (target) five years after the players' NHL Entry Draft, one would call
 
@@ -82,8 +88,9 @@ The collect_data.sh script can be called to do the whole data collection process
 
 It took one hour and thirty minutes to run the script on my machine with those inputs. The dataset obtained from the data collection has 917 player records over 57 different statistics.
 
-\
-\
+  
+
+
 ## Data Annotation: Classifying Records
 There are 13 possible classes. First, the PTS/GP statistic can fit in either of the following six ranges of values:
 
@@ -99,7 +106,8 @@ For players who have played the same amount of games in the NHL and the AHL, the
 
 Finally, players who haven't played in either the NHL or the AHL five years after being drafted are classified as: "0". 
 
+  
 
-
+  
 ## Results
 This section will explore the different models' performance. To consult the in-depth data analysis and model construction, please consult X.
