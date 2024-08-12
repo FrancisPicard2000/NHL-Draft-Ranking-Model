@@ -102,7 +102,10 @@ def main():
         no_playoff_stats = base_table_chl_reg_season_augmented.loc[base_table_chl_reg_season_augmented['PGP'] == 0]
         extra_columns = set(base_table_chl_augmented) - set(no_playoff_stats)
         for col in extra_columns:
-            no_playoff_stats[col] = 0
+            if col in ['PSO%', 'PFO%', 'PPTS/G', 'PPIM/G']:
+                no_playoff_stats[col] = 0.0
+            else:
+                no_playoff_stats[col] = 0
 
         base_table_chl_augmented = pd.concat([base_table_chl_augmented, no_playoff_stats], ignore_index=True)
         
