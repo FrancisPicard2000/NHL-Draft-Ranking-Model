@@ -92,19 +92,23 @@ It took one hour and thirty minutes to run the script on my machine with those i
 
 
 ## Data Annotation: Classifying Records
-There are 13 possible classes. First, the PTS/GP statistic can fit in either of the following six ranges of values:
+There are 14 possible classes. First, the regular season PTS/GP statistic can fit in either of the following six ranges of values:
 
     [0.0, 0.2), [0.2, 0.4), [0.4, 0.6), [0.6, 0.8), [0.8, 1.0), [1.0, ...)
 
-Note that the square bracket means that the value is included where as the parenthesis means that the value is excluded. For example, a value of 0.2 falls within \[0.2, 0.4) and not [0.0, 0.2). Also, the statistic can be retrieved in either the AHL or the NHL. Mapping all possible leagues and ranges gives a total of 12 classes. The last class is reserved for the players who haven't played in either the NHL or the AHL a few years after the draft (third input to the collect_data.sh script). For this project, I've decided to record the statistic five years after a player has been drafted.
+Note that the square bracket means the value is included whereas the parenthesis indicates the value is excluded. For example, a value of 0.2 falls within \[0.2, 0.4) but not within [0.0, 0.2). Also, the statistic can be retrieved in either the AHL or the NHL. Mapping all possible leagues and ranges gives a total of 12 classes. The other two classes concern the players who are not regular players in the NHL nor the AHL a few years after the draft (third input to the collect_data.sh script). For this project, I've decided to record the statistic five years after a player has been drafted.
 
-The classification process is fairly straightforward and is already implemented during the data collection; the user has nothing to do to classify the records. First, the PTS/GP statistic is retrieved from the HockeyDB scraping. Then, the class is obtained by mapping the value to the league it was measured in and the range of values that include it. For example, if a player was drafted in the 2009 NHL Entry Draft and only played in the NHL during the 2013-14 regular season (2009 + 5 = 2014) with a PTS/GP statistic of 0.47, then this record is classified as: NHL \[0.4, 0.6).
+The classification process is already implemented during the data collection; the user has nothing to do to classify the records. First, the PTS/GP statistic is retrieved from the HockeyDB scraping. Then, the class is obtained by mapping the value to the league it was measured in and the range of values that include it. For example, if a player was drafted in the 2009 NHL Entry Draft and only played in the NHL during the 2013-14 regular season (2009 + 5 = 2014, the regular season before the 2009 NHL Entry Draft is the 2008-09 season) with a PTS/GP statistic of 0.47, then this record is classified as: NHL \[0.4, 0.6).
 
 For players who have played in both the NHL and the AHL five years after being drafted, the PTS/GP statistic is taken from the league they have played the most games into. For example, if a player was drafted in the 2004 NHL Entry Draft and played 47 games in the AHL with a PTS/GP of 0.87 and 23 games in the NHL with a PTS/GP of 0.20 during the 2008-09 regular season, then the record is classified as: AHL \[0.8, 1.0). 
 
-For players who have played the same amount of games in the NHL and the AHL, the statistic is taken from the NHL. For example, if a player was drafted in the 2015 NHL Entry Draft and played 34 games in the AHL with a PTS/GP of 0.57 and 34 games in the NHL with a PTS/GP of 0.34 during the 2019-20 regular season, then the record is classified as: NHL \[0.2, 0.4)
+For players who have played the same amount of games in the NHL and the AHL five years after being drafted, the statistic is taken from the NHL. For example, if a player was drafted in the 2015 NHL Entry Draft and played 34 games in the AHL with a PTS/GP of 0.57 and 34 games in the NHL with a PTS/GP of 0.34 during the 2019-20 regular season, then the record is classified as: NHL \[0.2, 0.4)
 
-Finally, players who haven't played in either the NHL or the AHL five years after being drafted are classified as: "0". 
+It is worth noting that the PTS/GP statistic is only meaningful and accurate if the player has played enough games. To this end, I have chosen that players must have played a minimum of 20 games in either the AHL or 20 games in the NHL five years after their corresponding NHL Entry Draft to be classified into one of the 12 classes described above. What is left to do now is to handle the records that do not meet this requirement.
+
+The players who have played less than 20 games in the AHL and less than 20 games in the NHL, but have played at least 20 games in another league, five years after their corresponding NHL Entry Draft, are classified as: "Not_In_NHL_AHL". For example, if a player was drafted in the 2003 NHL Entry Draft and didn't play in the NHL, played five games in the AHL, and played 43 games in the ECHL during the 2007-08 regular season, then it fits in this category. Players in this category are playing professional hockey five years after their corresponding NHL Entry Draft, but not as a regular player in the NHL nor the AHL. 
+
+Finally, players who haven't played at least 20 games in any league five years after being drafted are classified as: "Other". It is hard to conclude anything about those players since their absence can be due to injury, retirement, etc. Some of them will have a career as a hockey player in the future and others won't.  
 
   
 

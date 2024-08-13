@@ -53,6 +53,12 @@ def retrieve_info(player, driver, init_window, draft_year, year_gap):
 
     # Retrieve target
     category = retrieve_target(data_table, proj_season_year)
+    if (category == "Invalid"):
+        # Close the window and go back to the draft window
+        driver.close()
+        driver.switch_to.window(init_window)
+        WebDriverWait(driver, 20).until(EC.title_contains(draft_year))
+        return "Invalid"
     player_data = [player_name] + player_junior_data + [category]
     
     # Close the window and go back to the draft window
@@ -106,31 +112,83 @@ def retrieve_target(data_table, proj_season_year):
     for parent in proj_parent_elements:
         proj_data = parent.text
         proj_data_elements = proj_data.split(" ")
-        if (len(proj_data_elements) < 15): # NOT NHL/AHL
+        proj_data_elements = [s.replace("--", "0") for s in proj_data_elements] # Only play in the playoffs
+
+        if (len(proj_data_elements) < 12): # Not from the AHL/NHL
+            gp, league= retrieve_data_diff_league(proj_data_elements)
+            if (league not in gp_dict):
+                gp_dict[league] = int(gp)
+            else:
+                gp_dict[league] += int(gp)
             continue
-        proj_data_elements = proj_data_elements[0:2] + [s.replace("--", "0") for s in proj_data_elements[2:]] # Only play in the playoffs
-        gp = proj_data_elements[-11]
-        pts = proj_data_elements[-8]
-        league = proj_data_elements[-12]
-        if league in ['AHL', 'NHL']:
-            gp_dict[league] += int(gp)
-            pts_dict[league] += int(pts)
-    
+        
+        else:
+            gp = proj_data_elements[-11]
+            pts = proj_data_elements[-8]
+            league = proj_data_elements[-12]
+        
+            if (league not in ['NHL', 'AHL']):
+                gp, league = retrieve_data_diff_league(proj_data_elements)
+                if league not in gp_dict:
+                    gp_dict[league] = int(gp)
+                else:
+                    gp_dict[league] += int(gp)
+                continue
+
+        gp_dict[league] += int(gp)
+        pts_dict[league] += int(pts)
+
+
     # Find target league and pts/gp
-    if ((gp_dict['AHL'] == 0) and (gp_dict['NHL'] == 0)):
-        target = None
-        proj_league = None
+    if (max(gp_dict['AHL'], gp_dict["NHL"]) < 20):
+
+        # If Regular, -> 0
+        if any(value >= 20 for value in gp_dict.values()):
+            target = "Not_In_NHL_AHL"
+            proj_league = "Not_In_NHL_AHL"
+
+        # Else -> Hard to say
+        else:
+            target = "Other"
+            proj_league = "Other"
+
+
     elif (gp_dict['AHL'] > gp_dict["NHL"]):
         target = round(pts_dict['AHL']/gp_dict['AHL'], 2)
         proj_league = 'AHL'
+
     else:
         target = round(pts_dict['NHL']/gp_dict['NHL'], 2)
         proj_league = 'NHL'
+
     
     # Categorize for a given league and pts/gp
     category = categorize(proj_league, target)
     return category
 
+
+
+def retrieve_data_diff_league(proj_data_elements):
+    potential_gp = None
+    potential_league = None
+
+    # Retrieve the gp from many different formats
+    # Assume: Teams can have a number in their name (e.g. HV71), but not two separated by a space
+    # Assume: Hockey Leagues do not have numbers in their name
+    # Format to look for: League_name (string), GP (int), G (int), first occurrence of this pattern within elements
+    for elem in proj_data_elements:
+        try:
+            int(elem)
+            if (potential_gp == None):
+                potential_gp = elem
+            else:
+                 break
+        except ValueError:
+            potential_gp = None
+            potential_league = elem
+            continue
+    
+    return potential_gp, potential_league
 
 
 
@@ -140,8 +198,11 @@ def categorize(league, value):
     intervals = [(0.0, 0.2), (0.2, 0.4), (0.4, 0.6), (0.6, 0.8), (0.8, 1.0)]
 
 
-    if (league == None) and (value == None):
-        return "None"
+    if (league == "Not_In_NHL_AHL") and (value == "Not_In_NHL_AHL"):
+        return "Not_In_NHL_AHL"
+    
+    if (league == "Other") and (value == "Other"):
+        return "Other"
 
     if (value >= 1.0):
         return league + " [1.0, ...]"
@@ -185,8 +246,9 @@ def main():
         for player in drafted_players:
             rank += 1
             player_data = retrieve_info(player, driver, windows_before, draft_year, gap)
-            if player_data != None:
+            if (player_data != None):
                 writer.writerow([rank] + player_data)
+
 
     driver.close()
 
