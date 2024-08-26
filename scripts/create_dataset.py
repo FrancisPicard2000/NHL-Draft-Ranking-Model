@@ -56,7 +56,6 @@ def load_chl_data(current_year):
     chl_playoffs_table = chl_playoffs_table.loc[chl_playoffs_table['PPosition'].isin(FORWARDS_POSITIONS)]
     chl_playoffs_table = chl_playoffs_table.drop(columns=['PPosition'])
     chl_reg_season_table = chl_reg_season_table.loc[chl_reg_season_table['Position'].isin(FORWARDS_POSITIONS)]
-    chl_reg_season_table = chl_reg_season_table.drop(columns=['Position'])
     return chl_reg_season_table, chl_playoffs_table 
 
 
