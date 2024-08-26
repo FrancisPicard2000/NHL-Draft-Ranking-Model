@@ -1,0 +1,95 @@
+Rank	Name	Team	League	GP	G	A	PTS	PIM	+/-	PGP	PG	PA	PPTS	PPIM	Proj_PTS/GP
+1	Steven Stamkos	Sarnia Sting	OHL	61	58	47	105	88	18	9	11	0	11	20	NHL [1.0, ...]
+2	Drew Doughty	Guelph Storm	OHL	58	13	37	50	68	-1	10	3	6	9	14	NHL [0.4, 0.6)
+3	Zach Bogosian	Peterborough Petes	OHL	60	11	50	61	72	8	5	0	3	3	8	NHL [0.4, 0.6)
+4	Alex Pietrangelo	Niagara IceDogs	OHL	60	13	40	53	94	29	6	5	4	9	4	NHL [0.4, 0.6)
+5	Luke Schenn	Kelowna Rockets	WHL	57	7	21	28	100	5	7	2	2	4	6	NHL [0.2, 0.4)
+8	Mikkel Boedker	Kitchener Rangers	OHL	62	29	44	73	14	6	20	9	26	35	2	NHL [0.4, 0.6)
+9	Joshua Bailey	Windsor Spitfires	OHL	67	29	67	96	32	30	5	1	5	6	2	NHL [0.4, 0.6)
+10	Cody Hodgson	Brampton Battalion	OHL	68	40	45	85	36	15	5	5	0	5	2	NHL [0.6, 0.8)
+11	Kyle Beach	Everett Silvertips	WHL	60	27	33	60	222	-4	4	0	0	0	4	AHL [0.2, 0.4)
+12	Tyler Myers	Kelowna Rockets	WHL	65	6	13	19	97	-16	7	1	2	3	12	NHL [0.2, 0.4)
+13	Colten Teubert	Regina Pats	WHL	66	7	16	23	135	-8	6	1	4	5	6	AHL [0.0, 0.2)
+14	Zach Boychuk	Lethbridge Hurricanes	WHL	61	33	39	72	80	26	18	13	8	21	6	AHL [0.8, 1.0)
+19	Luca Sbisa	Lethbridge Hurricanes	WHL	62	6	27	33	63	19	19	3	12	15	17	NHL [0.2, 0.4)
+20	Michael Del Zotto	Oshawa Generals	OHL	64	16	47	63	82	7	15	2	6	8	38	NHL [0.4, 0.6)
+22	Jordan Eberle	Regina Pats	WHL	70	42	33	75	20	5	5	2	4	6	7	NHL [0.6, 0.8)
+23	Tyler Cuma	Ottawa 67s	OHL	59	4	28	32	69	4	4	1	1	2	2	AHL [0.2, 0.4)
+25	Greg Nemisz	Windsor Spitfires	OHL	68	34	33	67	52	28	5	2	1	3	8	AHL [0.0, 0.2)
+26	Tyler Ennis	Medicine Hat Tigers	WHL	70	43	48	91	42	11	5	0	4	4	6	NHL [0.6, 0.8)
+33	Phil McRae	London Knights	OHL	66	18	28	46	61	-5	4	0	0	0	7	AHL [0.4, 0.6)
+35	Nicolas Deschamps	Chicoutimi Sagueneens	QMJHL	70	24	43	67	63	12	6	2	3	5	6	AHL [0.2, 0.4)
+39	Eric O'Dell	Sudbury Wolves	OHL	26	14	18	32	19	10	0	0	0	0	0	AHL [0.8, 1.0)
+41	Yann Sauve	Saint John Sea Dogs	QMJHL	69	6	15	21	92	1	14	1	2	3	23	Not_In_NHL_AHL
+44	Luke Adam	St Johns Fog Devils	QMJHL	70	36	30	66	72	9	6	3	5	8	8	AHL [0.4, 0.6)
+46	Colby Robak	Brandon Wheat Kings	WHL	71	6	24	30	25	-6	6	0	2	2	8	AHL [0.2, 0.4)
+47	Maxime Sauve	Val dOr Foreurs	QMJHL	70	26	39	65	30	11	4	2	3	5	2	AHL [0.4, 0.6)
+48	Mitch Wahl	Spokane Chiefs	WHL	67	20	53	73	63	33	21	6	8	14	20	AHL [0.2, 0.4)
+49	Jared Staal	Sudbury Wolves	OHL	60	21	28	49	44	-11	0	0	0	0	0	AHL [0.0, 0.2)
+50	Cameron Gaunce	Mississauga St Michaels Majors	OHL	63	10	30	40	99	-1	4	0	1	1	6	AHL [0.2, 0.4)
+53	Travis Hamonic	Moose Jaw Warriors	WHL	61	5	17	22	101	5	6	0	1	1	6	NHL [0.2, 0.4)
+54	Patrice Cormier	Rimouski Oceanic	QMJHL	51	18	23	41	84	11	9	4	5	9	10	AHL [0.2, 0.4)
+55	Marco Scandella	Val dOr Foreurs	QMJHL	65	4	10	14	35	-22	4	0	1	1	4	AHL [0.2, 0.4)
+57	Eric Mestery	Tri-City Americans	WHL	71	2	14	16	65	9	16	2	1	3	10	Not_In_NHL_AHL
+64	Danick Paquette	Lewiston MAINEiacs	QMJHL	63	29	13	42	213	8	5	1	2	3	30	Other
+67	Marc-Andre Bourdon	Rouyn-Noranda Huskies	QMJHL	69	12	47	59	114	39	17	2	16	18	25	Other
+68	Shawn Lalonde	Belleville Bulls	OHL	66	9	22	31	67	28	21	2	7	9	25	AHL [0.2, 0.4)
+69	Michael Stone	Calgary Hitmen	WHL	71	10	25	35	28	3	14	3	4	7	10	NHL [0.2, 0.4)
+70	James Livingston	Soo Greyhounds	OHL	68	21	23	44	135	10	14	2	3	5	14	AHL [0.2, 0.4)
+71	Josh Brittain	Kingston Frontenacs	OHL	68	28	23	51	106	-14	0	0	0	0	0	AHL [0.4, 0.6)
+72	Jyri Niemi	Saskatoon Blades	WHL	49	14	20	34	57	-1	0	0	0	0	0	Other
+74	Andrew Campbell	Soo Greyhounds	OHL	68	13	22	35	64	20	14	2	3	5	13	AHL [0.2, 0.4)
+76	Mathieu Brodeur	Cape Breton Screaming Eagles	QMJHL	69	1	6	7	27	-1	11	0	0	0	6	AHL [0.2, 0.4)
+78	Lance Bouma	Vancouver Giants	WHL	71	12	23	35	93	10	10	0	1	1	8	Other
+79	Zack Smith	Swift Current Broncos	WHL	72	22	48	70	136	31	12	5	5	10	29	NHL [0.2, 0.4)
+80	Adam Comrie	Saginaw Spirit	OHL	58	10	18	28	90	17	4	0	0	0	4	AHL [0.6, 0.8)
+82	Adam Henrique	Windsor Spitfires	OHL	66	20	24	44	28	17	5	2	3	5	4	NHL [0.2, 0.4)
+85	Brandon McMillan	Kelowna Rockets	WHL	71	15	26	41	56	-5	7	0	0	0	6	AHL [0.2, 0.4)
+87	Ian Schultz	Calgary Hitmen	WHL	67	15	15	30	128	10	16	2	7	9	19	Not_In_NHL_AHL
+88	Geordie Wudrick	Swift Current Broncos	WHL	66	20	24	44	72	10	12	5	2	7	12	Other
+92	Samuel Groulx	Quebec Remparts	QMJHL	70	5	20	25	100	5	11	0	3	3	14	Not_In_NHL_AHL
+97	Jamie Arniel	Sarnia Sting	OHL	60	27	20	47	38	-12	9	2	2	4	6	Not_In_NHL_AHL
+98	Mikhail Stefanovich	Quebec Remparts	QMJHL	62	32	34	66	32	0	11	4	4	8	10	Other
+99	Colin Long	Kelowna Rockets	WHL	72	31	69	100	41	22	7	2	10	12	6	Other
+100	A.J. Jenks	Plymouth Whalers	OHL	68	26	29	55	94	-13	4	1	0	1	4	Other
+104	Jordon Southorn	Prince Edward Island Rocket	QMJHL	69	12	19	31	70	-10	4	0	1	1	4	Not_In_NHL_AHL
+105	Michal Jordan	Plymouth Whalers	OHL	61	6	22	28	44	2	4	0	3	3	6	AHL [0.2, 0.4)
+107	Steven Delisle	Gatineau Olympiques	QMJHL	70	6	23	29	89	8	19	0	10	10	16	Not_In_NHL_AHL
+110	Kelsey Tessier	Quebec Remparts	QMJHL	68	36	45	81	73	19	11	8	7	15	10	AHL [0.2, 0.4)
+111	Dale Weise	Swift Current Broncos	WHL	53	29	21	50	84	8	12	7	6	13	20	NHL [0.0, 0.2)
+112	Matt Delahey	Regina Pats	WHL	68	3	16	19	68	7	6	0	3	3	6	Not_In_NHL_AHL
+114	T.J. Brodie	Saginaw Spirit	OHL	68	4	26	30	73	2	4	0	3	3	2	NHL [0.2, 0.4)
+117	James Wright	Vancouver Giants	WHL	60	13	23	36	21	4	6	1	0	1	2	AHL [0.4, 0.6)
+120	Nathan Moon	Kingston Frontenacs	OHL	68	35	42	77	79	-25	0	0	0	0	0	Not_In_NHL_AHL
+127	Matt Calvert	Brandon Wheat Kings	WHL	72	24	40	64	53	26	6	1	2	3	2	NHL [0.2, 0.4)
+129	Joel Champagne	Chicoutimi Sagueneens	QMJHL	70	18	22	40	45	1	6	1	1	2	6	Not_In_NHL_AHL
+131	Prabh Rai	Seattle Thunderbirds	WHL	72	20	45	65	21	31	11	2	4	6	4	Other
+132	Teigan Zahn	Saskatoon Blades	WHL	69	4	15	19	104	-28	0	0	0	0	0	Not_In_NHL_AHL
+133	Philippe Cornet	Rimouski Oceanic	QMJHL	61	23	26	49	24	14	9	3	3	6	6	AHL [0.6, 0.8)
+134	Jacob Lagace	Chicoutimi Sagueneens	QMJHL	67	23	39	62	40	22	6	3	2	5	7	Not_In_NHL_AHL
+137	Brent Regner	Vancouver Giants	WHL	72	8	39	47	45	11	10	0	10	10	10	AHL [0.2, 0.4)
+141	Chris Doyle	Prince Edward Island Rocket	QMJHL	63	27	36	63	81	-18	4	1	5	6	6	Not_In_NHL_AHL
+142	Kory Nagy	Oshawa Generals	OHL	57	5	12	17	47	-2	15	6	3	9	4	Not_In_NHL_AHL
+144	Joel Broda	Moose Jaw Warriors	WHL	73	30	23	53	74	-1	6	1	1	2	0	AHL [0.0, 0.2)
+146	Julien Demers	Ottawa 67s	OHL	65	5	28	33	94	-5	4	0	2	2	0	Other
+147	Kyle DeCoste	Brampton Battalion	OHL	66	10	12	22	48	-9	5	0	0	0	2	Not_In_NHL_AHL
+148	Matt Martin	Sarnia Sting	OHL	66	25	13	38	155	3	9	3	3	6	16	NHL [0.2, 0.4)
+152	Mark Barberio	Moncton Wildcats	QMJHL	70	11	35	46	75	-3	0	0	0	0	0	AHL [0.4, 0.6)
+153	Justin Azevedo	Kitchener Rangers	OHL	67	43	81	124	69	24	20	10	26	36	33	Not_In_NHL_AHL
+155	Anthony Nigro	Guelph Storm	OHL	67	24	24	48	65	1	10	2	3	5	7	AHL [0.2, 0.4)
+156	Jared Spurgeon	Spokane Chiefs	WHL	69	12	31	43	19	36	21	0	5	5	16	NHL [0.2, 0.4)
+164	Nick Crawford	Saginaw Spirit	OHL	68	4	16	20	58	-1	4	1	1	2	2	AHL [0.2, 0.4)
+167	Joel Chouinard	Victoriaville Tigres	QMJHL	69	7	28	35	95	-13	6	2	0	2	4	Not_In_NHL_AHL
+168	Ryley Grantham	Moose Jaw Warriors	WHL	66	10	9	19	163	-6	6	0	0	0	8	AHL [0.0, 0.2)
+171	Mitch Gaulton	Erie Otters	OHL	20	2	5	7	19	-10	0	0	0	0	0	Other
+175	Justin DiBenedetto	Sarnia Sting	OHL	58	39	54	93	61	12	9	3	7	10	12	Not_In_NHL_AHL
+176	Matt Tassone	Swift Current Broncos	WHL	60	19	17	36	111	16	12	3	5	8	12	Other
+178	Zac Rinaldo	Mississauga St Michaels Majors	OHL	63	7	7	14	191	-14	4	0	0	0	9	NHL [0.0, 0.2)
+181	Stephen Johnston	Belleville Bulls	OHL	56	2	7	9	12	0	21	5	2	7	6	Not_In_NHL_AHL
+186	Jason Demers	Victoriaville Tigres	QMJHL	67	9	55	64	91	-6	6	1	5	6	6	NHL [0.0, 0.2)
+189	Tim Billingsley	Mississauga St Michaels Majors	OHL	68	5	22	27	95	-8	2	0	0	0	2	Not_In_NHL_AHL
+193	Jordan Bendfeld	Medicine Hat Tigers	WHL	72	6	19	25	160	8	5	0	2	2	2	Other
+195	Samuel Morneau	Baie-Comeau Drakkar	QMJHL	68	23	19	42	54	16	5	0	1	1	8	Other
+202	Harry Young	Windsor Spitfires	OHL	68	2	12	14	155	13	5	0	1	1	8	Not_In_NHL_AHL
+204	Stefan Della Rovere	Barrie Colts	OHL	68	13	19	32	171	-14	9	1	2	3	16	AHL [0.0, 0.2)
+205	Jean-Sebastien Berube	Rouyn-Noranda Huskies	QMJHL	64	12	12	24	118	18	17	1	3	4	16	Other
