@@ -3,14 +3,14 @@
 ## Overview
 This project aims to develop machine learning models to predict how good draft-eligible junior hockey players will be in the future. Currently, the dataset consists of 54 statistics about 917 NHL-drafted forwards who have played in the CHL (Canadian Hockey League) between 2000-01 and 2018-19. The models are meant to be used by NHL teams before the NHL Entry Draft to make projections about all the relevant CHL players, which might be used later in the ranking process.
 
-To check the in-depth data analysis report of this project, please consult X. Below I will explain the directory structure and how to retrieve the data.
+To check the in-depth data analysis report of this project, please consult report.pdf. Below I will explain the directory structure and how to retrieve the data.
 
 
 
 ## Directory Structure
 There are four directories in this repo: data, scripts, data analysis, models
 
-First, the *data* folder is meant to contain all the data useful for the data collection, the data collected by the scrapers, and the dataset obtained after merging the data from the different sources. The main branch only contains the minimum data required to perform the data collection, i.e. some page sources, as well as the dataset obtained after merging everything. The scraped data is available in branch X if necessary. The dataset in the main directory is the one I have used to develop the models.
+First, the *data* folder is meant to contain all the data useful for the data collection, the data collected by the scrapers, and the dataset obtained after merging the data from the different sources. The main branch only contains the minimum data required to perform the data collection, i.e. some page sources, as well as the dataset obtained after merging everything. The scraped data is available in branch Full-Data if necessary. The dataset in the main directory is the one I have used to develop the models.
 
 The *scripts* directory contains all the Python and Bash scripts required for data collection. In the Data Collection section, I explained how to use these scripts to collect the data.
 
